@@ -1,0 +1,56 @@
+---
+// Theme provider script that handles theme initialization and persistence
+const DEFAULT_THEME = "dark";
+---
+
+<script define:vars={{ theme: DEFAULT_THEME }}>
+  // Theme management
+  class ThemeManager {
+    constructor() {
+      this.init();
+    }
+
+    init() {
+      const savedTheme = localStorage.getItem('theme') || DEFAULT_THEME;
+
+      this.applyTheme(savedTheme);
+
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        if (!localStorage.getItem('theme')) {
+          this.applyTheme(e.matches ? 'dark' : 'light');
+        }
+      });
+    }
+
+    applyTheme(theme) {
+      const root = document.documentElement;
+
+      if (theme === 'dark') {
+        root.classList.add('dark');
+      } else {
+        root.classList.remove('dark');
+      }
+
+      const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+      if (metaThemeColor) {
+        metaThemeColor.setAttribute('content', theme === 'dark' ? '#000000' : '#ffffff');
+      }
+    }
+
+    toggle() {
+      const currentTheme = localStorage.getItem('theme') || DEFAULT_THEME;
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+      localStorage.setItem('theme', newTheme);
+      this.applyTheme(newTheme);
+
+      return newTheme;
+    }
+
+    getCurrentTheme() {
+      return localStorage.getItem('theme') || DEFAULT_THEME;
+    }
+  }
+
+  window.themeManager = new ThemeManager();
+</script>

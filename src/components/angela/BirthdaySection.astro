@@ -1,0 +1,46 @@
+---
+import { angelaConfig, daysUntilBirthday } from "@/data/angela/config";
+import UnicornEmoji from "@/components/angela/UnicornEmoji.astro";
+
+const { birthday: birthdayConfig, birthdayDate, birthdayDisplay } = angelaConfig;
+const daysLeft = daysUntilBirthday(birthdayDate);
+---
+
+<section id="birthday" class="angela-section px-6 py-20 max-w-3xl mx-auto">
+  <div
+    class="angela-card p-8 md:p-12 text-center relative overflow-hidden"
+    style="background: linear-gradient(160deg, #FFF8E7 0%, #F3E8FF 60%, #FFF8E7 100%)"
+  >
+    <div class="absolute top-4 left-4 opacity-20">
+      <img src="/angela/lemon-slice.svg" alt="" class="w-12" />
+    </div>
+    <div class="absolute bottom-4 right-4 opacity-20">
+      <UnicornEmoji class="opacity-20" />
+    </div>
+
+    <p class="text-sm uppercase tracking-[0.25em] text-lavender-400 mb-4">Happy Birthday</p>
+    <h2 class="angela-display text-4xl md:text-5xl font-bold text-warm-ink mb-6">
+      {birthdayConfig.title}
+    </h2>
+    <p class="text-warm-muted leading-relaxed text-base md:text-lg mb-6 max-w-xl mx-auto">
+      {birthdayConfig.message}
+    </p>
+    <p class="text-warm-muted italic text-sm mb-8">{birthdayConfig.submessage}</p>
+
+    <div class="inline-flex flex-col sm:flex-row items-center gap-3 px-6 py-4 rounded-2xl bg-white/70 border border-lemon-300">
+      <span class="text-4xl font-bold text-lemon-500 leading-none">{daysLeft}</span>
+      <span class="text-sm text-warm-muted text-center sm:text-left">
+        days until <strong class="text-warm-ink">{birthdayDisplay}</strong><br />
+        your next adventure around the sun
+      </span>
+    </div>
+  </div>
+
+  <button
+    class="angela-unicorn-btn block mx-auto mt-6 opacity-50"
+    data-unicorn-index="4"
+    aria-label="Hidden unicorn"
+  >
+    <UnicornEmoji size="sm" />
+  </button>
+</section>

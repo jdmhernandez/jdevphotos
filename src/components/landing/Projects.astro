@@ -1,0 +1,236 @@
+---
+// Assets
+import { Image } from "astro:assets";
+import lppLogo from "@/images/work/lpp-logo-capstone.jpg";
+import three from "@/images/projects/3.png";
+import six from "@/images/projects/6.png";
+
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+
+// Featured project (full-width)
+const featuredProject = {
+  image: lppLogo,
+  year: "2025",
+  title: "Lollipop's Party Packages",
+  link: "https://lollipopspartypackages.ca/",
+  github: null, // Client project - no public repo
+  alt: "Lollipop's Party Packages - E-commerce website for local party supply business",
+  tagline: "Built e-commerce platform for local Edmonton business to streamline party supply ordering.",
+  tech: ["WordPress", "Custom CSS", "Responsive Design", "WooCommerce"],
+  implemented: [
+    "Responsive mobile-first design for seamless shopping on any device",
+    "Custom CSS styling matching brand identity",
+    "Migration from Wix with zero downtime",
+    "Optimized product pages for faster load times",
+  ],
+  featured: true,
+};
+
+// Other projects (2-column grid)
+const projects = [
+  {
+    image: three,
+    year: "2025",
+    title: "Personal Portfolio",
+    link: "/",
+    github: "https://github.com/jdmhernandez/jdmportfolio",
+    alt: "Clean, modern portfolio website with dark/light theme toggle and responsive grid layout",
+    tagline: "Built fast, accessible portfolio to showcase web development skills to employers.",
+    tech: ["Astro", "Tailwind CSS", "TypeScript"],
+    implemented: [
+      "Dark/light theme toggle with system preference detection",
+      "Responsive grid layouts adapting to any screen size",
+      "95+ Lighthouse performance score",
+    ],
+  },
+  {
+    image: six,
+    year: "2024",
+    title: "Simply Broccoli",
+    link: "https://simplybroccoli.netlify.app/",
+    github: "https://github.com/jdmhernandez/simply-broccoli",
+    alt: "Simply Broccoli website featuring broccolini recipes and cooking guides",
+    tagline: "Built recipe content site with focus on clean UX and mobile-first design.",
+    tech: ["HTML5", "CSS3", "Responsive Design", "Netlify"],
+    implemented: [
+      "Mobile-first responsive layout",
+      "Semantic HTML for accessibility",
+      "Optimized imagery for fast loading",
+    ],
+  },
+];
+---
+
+<section id="projects" class="reveal">
+  <Wrapper variant="standard">
+    <div
+      class="grid grid-cols-1 gap-4 md:grid-cols-3 border-b py-8 border-base-200 dark:border-base-700"
+    >
+      <div class="lg:sticky lg:top-24 lg:z-40 self-start">
+        <Text
+          tag="h2"
+          variant="textSM"
+          class="text-base-900 dark:text-base-100 font-bold uppercase"
+        >
+          Projects
+        </Text>
+      </div>
+      <div class="lg:col-span-2 flex flex-col gap-12">
+        {/* Featured Project - Full Width */}
+        <article class="group relative rounded-2xl border border-base-200 dark:border-base-700 p-4 sm:p-6 transition-all duration-200 ease-out hover:border-accent-400 dark:hover:border-accent-500 hover:shadow-lg hover:shadow-accent-500/10 hover:-translate-y-1">
+          <div class="overflow-hidden rounded-lg mb-4">
+            <Image
+              width={800}
+              height={600}
+              src={featuredProject.image}
+              alt={featuredProject.alt}
+              class="aspect-12/7 object-cover object-top w-full transition-transform duration-200 ease-out group-hover:scale-105"
+            />
+          </div>
+          <div class="flex items-center gap-2 mb-2">
+            <span class="px-2 py-0.5 text-xs font-bold uppercase bg-accent-500 text-white rounded">
+              Capstone
+            </span>
+            <time datetime={featuredProject.year} class="text-xs text-base-500 dark:text-base-400">
+              {featuredProject.year}
+            </time>
+          </div>
+          <Text
+            tag="h3"
+            variant="textSM"
+            class="text-base-900 dark:text-base-100 font-bold uppercase mb-2"
+          >
+            {featuredProject.title}
+          </Text>
+          <p class="text-sm text-base-700 dark:text-base-300 mb-3">
+            → {featuredProject.tagline}
+          </p>
+          
+          {/* Tech Stack Pills */}
+          <div class="flex flex-wrap gap-2 mb-4">
+            {featuredProject.tech.map((tech) => (
+              <span class="px-2 py-1 text-xs font-medium bg-base-100 dark:bg-base-800 text-base-600 dark:text-base-300 rounded border border-base-200 dark:border-base-700">
+                {tech}
+              </span>
+            ))}
+          </div>
+          
+          {/* Implementations */}
+          <div class="mb-4">
+            <p class="text-xs font-bold uppercase text-base-500 dark:text-base-400 mb-2">I implemented:</p>
+            <ul class="space-y-1">
+              {featuredProject.implemented.map((item) => (
+                <li class="text-sm text-base-600 dark:text-base-400 flex items-start gap-2">
+                  <span class="text-accent-500 mt-0.5">✓</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+          
+          {/* Links */}
+          <div class="flex items-center gap-3 pt-3 border-t border-base-200 dark:border-base-700">
+            <a 
+              href={featuredProject.link} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold uppercase bg-accent-500 hover:bg-accent-600 text-white rounded transition-colors"
+            >
+              Live Demo →
+            </a>
+            {featuredProject.github && (
+              <a 
+                href={featuredProject.github}
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold uppercase border border-base-300 dark:border-base-600 text-base-700 dark:text-base-300 hover:border-accent-400 hover:text-accent-500 rounded transition-colors"
+              >
+                GitHub
+              </a>
+            )}
+          </div>
+        </article>
+
+        {/* Other Projects - 2 Column Grid */}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {
+            projects.map((project) => (
+              <article class="group relative rounded-2xl border border-base-200 dark:border-base-700 p-4 transition-all duration-200 ease-out hover:border-accent-400 dark:hover:border-accent-500 hover:shadow-lg hover:shadow-accent-500/10 hover:-translate-y-1">
+                <div class="overflow-hidden rounded-lg mb-4">
+                  <Image
+                    width={800}
+                    height={600}
+                    src={project.image}
+                    alt={project.alt}
+                    class="aspect-12/7 object-cover object-top w-full transition-transform duration-200 ease-out group-hover:scale-105"
+                  />
+                </div>
+                <div class="flex items-center justify-between mb-2">
+                  <Text
+                    tag="h3"
+                    variant="textSM"
+                    class="text-base-900 dark:text-base-100 font-bold uppercase"
+                  >
+                    {project.title}
+                  </Text>
+                  <time datetime={project.year} class="text-xs text-base-500 dark:text-base-400">
+                    {project.year}
+                  </time>
+                </div>
+                <p class="text-sm text-base-700 dark:text-base-300 mb-3">
+                  → {project.tagline}
+                </p>
+                
+                {/* Tech Stack Pills */}
+                <div class="flex flex-wrap gap-1.5 mb-3">
+                  {project.tech.map((tech) => (
+                    <span class="px-2 py-0.5 text-xs font-medium bg-base-100 dark:bg-base-800 text-base-600 dark:text-base-300 rounded border border-base-200 dark:border-base-700">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+                
+                {/* Implementations */}
+                <div class="mb-4">
+                  <p class="text-xs font-bold uppercase text-base-500 dark:text-base-400 mb-1.5">I implemented:</p>
+                  <ul class="space-y-0.5">
+                    {project.implemented.map((item) => (
+                      <li class="text-xs text-base-600 dark:text-base-400 flex items-start gap-1.5">
+                        <span class="text-accent-500 mt-0.5">✓</span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                
+                {/* Links */}
+                <div class="flex items-center gap-2 pt-3 border-t border-base-200 dark:border-base-700">
+                  <a 
+                    href={project.link}
+                    target={project.link.startsWith('http') ? '_blank' : '_self'}
+                    rel={project.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+                    class="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-bold uppercase bg-accent-500 hover:bg-accent-600 text-white rounded transition-colors"
+                  >
+                    Live Demo →
+                  </a>
+                  {project.github && (
+                    <a 
+                      href={project.github}
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-bold uppercase border border-base-300 dark:border-base-600 text-base-700 dark:text-base-300 hover:border-accent-400 hover:text-accent-500 rounded transition-colors"
+                    >
+                      GitHub
+                    </a>
+                  )}
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </Wrapper>
+</section>
