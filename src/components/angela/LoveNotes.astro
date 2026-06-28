@@ -14,7 +14,7 @@ const hasSharedBoard = Boolean(supabaseUrl && supabaseKey);
       Our Sticky Notes
     </h2>
     <p class="text-warm-muted max-w-xl mx-auto">
-      Leave a note for each other. Thoughts, date ideas, inside jokes, or a little love anytime
+      Leave a note for me. Thoughts, date ideas, inside jokes, or a little love anytime
       you come back.
     </p>
     <p id="notes-mode-label" class="text-xs text-lavender-400 mt-3 italic"></p>
@@ -108,7 +108,7 @@ const hasSharedBoard = Boolean(supabaseUrl && supabaseKey);
   if (modeLabel) {
     modeLabel.textContent = hasSharedBoard
       ? "Shared board. You both see the same notes on any device."
-      : "Saving on this device for now. Shared board can be enabled later.";
+      : "Saving on this device for now. I didn't have time to figure this out yet lol";
   }
 
   const colorEl = document.getElementById("note-colors");
